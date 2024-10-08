@@ -1,0 +1,81 @@
+namespace = vio_events
+
+vio_events.1 = { #Rich industrialist wants to build a university
+	type = country_event
+	placement = scope:university_state
+
+	title = vio_events.1.t
+	desc = vio_events.1.d
+	flavor = vio_events.1.f
+
+	duration = 3
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:university_benefactor
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+		has_technology_researched = academia
+		ig:ig_intelligentsia = {
+			is_marginal = no
+		}
+		any_scope_state = {
+			is_incorporated = yes
+			has_building = building_urban_center
+			NOT = {
+				has_building = building_printing_houses
+			}
+		}
+	}
+
+	immediate = {
+		ig:ig_intelligentsia = {
+			leader = { 
+				save_scope_as = university_benefactor
+			}
+		}
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				has_building = building_urban_center
+				NOT = {
+					has_building = building_printing_houses
+				}
+			}
+			save_scope_as = university_state
+		}
+	}
+
+	option = {
+		default_option = yes
+		name = vio_events.1.a
+		scope:university_state = {
+			create_building={
+ 				building="building_printing_houses"
+ 				level=1
+ 				reserves=1
+ 			}
+		}
+		scope:university_benefactor.interest_group = {
+			add_modifier = {
+				name = modifier_university_built
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = vio_events.1.b
+		scope:university_benefactor.interest_group = {
+			add_modifier = {
+				name = modifier_blocked_building_printing_houses
+				months = normal_modifier_time
+			}
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "name" : "Distilleries!",
+  "id" : "",
+  "image" : "thumbnail.png",
+  "version" : "0.1.1",
+  "supported_game_version" : "1.6.*",
+  "short_description" : "Splits liquor production off into a seperate building.",
+  "tags" : [],
+  "relationships" : [],
+  "game_custom_data" : {
+    "multiplayer_synchronized" : true
+  }
+}
